@@ -28,19 +28,17 @@ def main(args):
     start_page = args.website
     driver = webdriver.Firefox()
     driver.get(start_page)
-    html = driver.page_source
-    soup = BeautifulSoup(html, "html.parser")
     max_page = 48
     page_number = 1
     try:
         page_results = {}
         while page_number<=max_page:
-            element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, next_page)))
-            driver.execute_script("arguments[0].click();", element)
             html = driver.page_source
             soup = BeautifulSoup(html, "html.parser")
             page_results[str(page_number)] = get_yachts(soup)
             page_number += 1
+            element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, next_page)))
+            driver.execute_script("arguments[0].click();", element)
     except:
         print(f"error on page {page_number}")
     finally:
