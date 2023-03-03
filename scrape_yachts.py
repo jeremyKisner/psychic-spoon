@@ -49,7 +49,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process a website.')
-    parser.add_argument("-s", "--website", type=str,
+    parser.add_argument("-s", "--website", type=str, required=True,
                     help='enter client website request')
     args = parser.parse_args()
     main(args)
